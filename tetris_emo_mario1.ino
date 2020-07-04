@@ -32,9 +32,8 @@ game_matrix matrix;
 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-/*
- * Check if the char in input is "empty" ( == ' ' )
- */
+// Check if the char in input is "empty" ( == ' ' )
+ 
 int is_empty(char p)
 {
     if (p == ' ')
@@ -50,7 +49,7 @@ struct point
     int y;
 };
 
-/* Tetromino piece */
+//Tetromino piece
 struct tetromino
 {
     char type;
@@ -65,9 +64,8 @@ int max_line = N_ROWS + 1;
 
 struct tetromino start_pos[7];
 
-/*
- * Draw the tetromino on the matrix of the game
- */
+//Draw the tetromino on the matrix of the game
+ 
 void draw_tetromino(struct tetromino *tetr, char val)
 {
     struct point bl;
@@ -81,17 +79,14 @@ void draw_tetromino(struct tetromino *tetr, char val)
     }
 }
 
-/*
- * Move the tetromino.
- * If collision occurs, return 1
- */
+// Move the tetromino. 
 int move(int mov, struct tetromino *tetr)
 {
     int i;
-    struct point temp[4]; /* New position of blocks  */
-    struct point pos; /* New position of tetromino */
+    struct point temp[4]; // New position of blocks 
+    struct point pos; // New position of tetromino
 
-    /* Compute new blocks' positions */
+    // Compute new blocks' positions
     switch(mov)
     {
         case LEFT:
@@ -145,10 +140,10 @@ int move(int mov, struct tetromino *tetr)
                 return 1;
     }
 
-    /* Move the tetromino */
+    // Move the tetromino
     draw_tetromino(tetr, ' ');
     
-    /* Check for collisions */
+    // Check for collisions
     for (i=0; i<4; i++)
     {
         if (matrix[temp[i].x][temp[i].y] != ' ')
@@ -171,9 +166,7 @@ int move(int mov, struct tetromino *tetr)
     return 0;
 }
 
-/*
- * Search in the mapping table if the key is present
- */
+// Search in the mapping table if the key is present
 int find_mapping(struct lcd_map *mapping, byte key)
 {
     int i;
@@ -184,9 +177,7 @@ int find_mapping(struct lcd_map *mapping, byte key)
     return -1;
 }
 
-/*
- * Insert the key into the mapping table
- */
+//Insert the key into the mapping table
 int insert_mapping(struct lcd_map *mapping, byte key)
 {
     int pos = mapping->max;
@@ -361,9 +352,9 @@ void setup()
 
     randomSeed(millis());
     
-    /* initial positions of the tetrominoes */
+    // initial positions of the tetrominoes
 
-    /* I-block */
+    // I-block
     start_pos[0].type = 'I';
     start_pos[0].pos.x = 1;
     start_pos[0].pos.y = 2;
@@ -377,7 +368,7 @@ void setup()
     start_pos[0].blocks[3].x = 1;
     start_pos[0].blocks[3].y = 4;
 
-    /* J-block */
+    // J-block
     start_pos[1].type = 'J';
     start_pos[1].pos.x = 1;
     start_pos[1].pos.y = 3;
@@ -391,7 +382,7 @@ void setup()
     start_pos[1].blocks[3].x = 1;
     start_pos[1].blocks[3].y = 4;
 
-    /* L-block */
+    // L-block 
     start_pos[2].type = 'L';
     start_pos[2].pos.x = 1;
     start_pos[2].pos.y = 3;
